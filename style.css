@@ -1,0 +1,33 @@
+html {
+    background-color: #DBDBDB;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.calculator-body {
+    transform: translateY(50%);
+    margin: auto;
+    background-color: #8D8D8D;
+    width: 30rem;
+    height: 40rem;
+}
+
+.calculator-screen {
+    width: 103%;
+    height: 25%;
+    margin-left: -0.45rem;
+    background-color: #C0C0C0;
+    box-shadow: 0 0 5rem rgb(20, 20, 20);
+}
+
+.buttons {
+    background-color: #C0C0C0;
+    width: 90%;
+    height: 65%;
+    margin: 2rem auto;
+    box-shadow: 0 0 5rem rgb(20, 20, 20);
+}
