@@ -31,3 +31,52 @@ body {
     margin: 2rem auto;
     box-shadow: 0 0 5rem rgb(20, 20, 20);
 }
+
+.button-row {
+    margin: auto;
+    margin-top: 0.1rem;
+    width: inherit;
+    height: 5.08rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    border: 1px solid transparent;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 9rem;
+    margin-top: 0.3rem;
+}
+
+#button_0, #button_1, #button_2, #button_3,
+#button_4, #button_5, #button_6, #button_7,
+#button_8, #button_9, #button_dot {
+    background-color: #E0E0E0;
+}
+
+#button_plus, #button_minus, #button_mult,
+#button_div {
+    background-color: #6F6F6F;
+}
+
+#button_hide2 {
+    display: none;
+}
+
+#button_hide1 {
+    background-color: inherit;
+}
+
+#button_enter {
+    background-color: #9BEBBD;
+    height: 9.7rem;
+}
+
+#button_ac, #button_ce {
+    background-color: #9D0404;
+}
+
+#button_0 {
+    width: 11.3rem;
+}
