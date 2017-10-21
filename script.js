@@ -1,11 +1,11 @@
 $(document).ready(function () {
-    testWrite();
+    calculateInput();
 });
 
 var calculate = "",
     currentEntry = "";
 
-function testWrite() {
+function calculateInput() {
     $(".button").on("click", function () {
         if (this.id.match(/\d/)) {
             currentEntry += this.id.match(/\d/)[0];
