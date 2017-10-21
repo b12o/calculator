@@ -18,7 +18,7 @@ html {
 }
 
 .entry {
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     height: 50%;
     width: 90%;
     margin: auto;
@@ -27,7 +27,7 @@ html {
 }
 
 .all-entries {
-    border: 1px solid green;
+    /*border: 1px solid green;*/
     width: 90%;
     height: 20%;
     margin: auto;
@@ -81,11 +81,11 @@ button {
     color: #E0E0E0;
 }
 
-#button_hide2 {
+#button_hide2{
     display: none;
 }
 
-#button_hide1 {
+#button_hide_enter {
     background-color: inherit;
 }
 
