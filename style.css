@@ -2,15 +2,8 @@ html {
     background-color: #DBDBDB;
 }
 
-body {
-    height: 100%;
-    width: 100%;
-    text-align: center;
-}
-
 .calculator-body {
-    transform: translateY(50%);
-    margin: auto;
+    margin: 7rem auto;
     background-color: #8D8D8D;
     width: 30rem;
     height: 40rem;
@@ -22,6 +15,10 @@ body {
     margin-left: -0.45rem;
     background-color: #C0C0C0;
     box-shadow: 0 0 5rem rgb(20, 20, 20);
+}
+
+button {
+    outline: none;
 }
 
 .buttons {
@@ -49,15 +46,21 @@ body {
     margin-top: 0.3rem;
 }
 
+.button-text {
+    font-family: "Josefin Sans", sans-serif;
+}
+
 #button_0, #button_1, #button_2, #button_3,
 #button_4, #button_5, #button_6, #button_7,
 #button_8, #button_9, #button_dot {
     background-color: #E0E0E0;
+    color: #6F6F6F;
 }
 
 #button_plus, #button_minus, #button_mult,
 #button_div {
     background-color: #6F6F6F;
+    color: #E0E0E0;
 }
 
 #button_hide2 {
@@ -71,10 +74,12 @@ body {
 #button_enter {
     background-color: #9BEBBD;
     height: 9.7rem;
+    color: #6F6F6F;
 }
 
 #button_ac, #button_ce {
     background-color: #9D0404;
+    color: #E0E0E0;
 }
 
 #button_0 {
