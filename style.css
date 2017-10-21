@@ -17,6 +17,24 @@ html {
     box-shadow: 0 0 5rem rgb(20, 20, 20);
 }
 
+.entry {
+    border: 1px solid blue;
+    height: 50%;
+    width: 90%;
+    margin: auto;
+    position: relative;
+    top: 1rem;
+}
+
+.all-entries {
+    border: 1px solid green;
+    width: 90%;
+    height: 20%;
+    margin: auto;
+    position: relative;
+    top: 1rem;
+}
+
 button {
     outline: none;
 }
