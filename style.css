@@ -1,3 +1,7 @@
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Josefin Sans", sans-serif;
+}
+
 html {
     background-color: #DBDBDB;
 }
@@ -27,12 +31,18 @@ html {
 }
 
 .all-entries {
-    /*border: 1px solid green;*/
     width: 90%;
     height: 20%;
     margin: auto;
     position: relative;
     top: 1rem;
+}
+
+.all-entries h2 {
+    position: relative;
+    top: -1rem;
+    float: right;
+    color: #8D8D8D;
 }
 
 button {
@@ -64,10 +74,6 @@ button {
     margin-top: 0.3rem;
 }
 
-.button-text {
-    font-family: "Josefin Sans", sans-serif;
-}
-
 #button_0, #button_1, #button_2, #button_3,
 #button_4, #button_5, #button_6, #button_7,
 #button_8, #button_9, #button_dot {
@@ -81,7 +87,7 @@ button {
     color: #E0E0E0;
 }
 
-#button_minus h2{
+#button_minus h2, #button_plus h2, #button_mult h2, #button_div h2{
     font-size: 2rem;
     position: relative;
     bottom: 0.5rem;
@@ -92,6 +98,7 @@ button {
 }
 
 #button_hide_enter {
+    visibility: hidden;
     background-color: inherit;
 }
 
@@ -108,10 +115,4 @@ button {
 
 #button_0 {
     width: 11.3rem;
-}
-
-#button_div h2{
-    font-size: 2rem;
-    position: relative;
-    bottom: 0.5rem;
 }
