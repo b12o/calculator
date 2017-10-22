@@ -81,6 +81,12 @@ button {
     color: #E0E0E0;
 }
 
+#button_minus h2{
+    font-size: 2rem;
+    position: relative;
+    bottom: 0.5rem;
+}
+
 #button_hide2{
     display: none;
 }
@@ -102,4 +108,10 @@ button {
 
 #button_0 {
     width: 11.3rem;
+}
+
+#button_div h2{
+    font-size: 2rem;
+    position: relative;
+    bottom: 0.5rem;
 }
