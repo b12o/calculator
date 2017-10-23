@@ -84,7 +84,7 @@ function calculateInput() {
 }
 
 function isDecimal(val) {
-    return (val.match(/\./) !== null && val.match(/\./)[0].length === 1);
+    return (val.match(/\./) !== null);
 }
 // takes calculation in string form, converts to mathematical calculation and returns result
 function stringToCalculation(string) {
