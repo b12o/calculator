@@ -3,7 +3,7 @@ $(document).ready(function () {
 });
 
 var calculate = "",
-    currentEntry = "",
+    currentEntry = "", previousEntry = "",
     result = "";
 
 function calculateInput() {
@@ -66,7 +66,12 @@ function calculateInput() {
                     case "button_hide_enter":
                         calculate += currentEntry;
                         console.log("calculation: " + calculate);
-                        result = "todo";
+                        result = stringToCalculation(calculate);
+                        if (result.toString().length > 18) {
+                            $(".all-entries").html("<h2>OVERFLOW ERROR</h2>");
+                        } else {
+                            $(".all-entries").html("<h2>" + calculate + " = " + result + "</h2>");
+                        }
                         console.log(result);
                         calculate = "";
                         currentEntry = "";
@@ -80,4 +85,10 @@ function calculateInput() {
 
 function isDecimal(val) {
     return (val.match(/\./) !== null && val.match(/\./)[0].length === 1);
+}
+// takes calculation in string form, converts to mathematical calculation and returns result
+function stringToCalculation(string) {
+    var newString = string.replace(/x/g, "*"); // eval does not accept "x" as multiplication, only "*"
+    var result = eval(newString);
+    return Math.round(result * 100) / 100; // handling for JS floating point weirdness
 }
