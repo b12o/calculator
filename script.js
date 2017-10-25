@@ -6,6 +6,8 @@ var calculate = "",
     currentEntry = "", previousEntry = "",
     result = "";
 
+var calculationFinished = false;
+
 function calculateInput() {
     $(".button").on("click", function () {
 
@@ -14,7 +16,6 @@ function calculateInput() {
             previousEntry = currentEntry;
             $(".entry").html("<h1>" + previousEntry + "</h1>");
             $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
-            console.log("calculation: " + calculate + ", current entry: " + currentEntry);
         }
         else {
             // clear entire input
@@ -24,7 +25,6 @@ function calculateInput() {
                 previousEntry = "";
                 $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
                 $(".entry").html("<h1>" + previousEntry + "</h1>");
-                console.log("calculation: " + calculate + ", current entry: " + currentEntry);
             }
 
             else if (currentEntry.length === 0 && this.id === "button_dot") {
@@ -77,7 +77,6 @@ function calculateInput() {
                     case "button_enter":
                     case "button_hide_enter":
                         calculate += currentEntry;
-                        console.log("calculation: " + calculate);
                         result = stringToCalculation(calculate);
                         previousEntry = result;
                         if (result.toString().length > 18) {
@@ -87,12 +86,20 @@ function calculateInput() {
                             $(".entry").html("<h1>" + previousEntry + "</h1>");
                             $(".all-entries").html("<h2>" + calculate + " = " + result + "</h2>");
                         }
-                        console.log(result);
+                        calculationFinished = true;
                         calculate = "";
                         currentEntry = "";
                         break;
                 }
-                console.log("calculation: " + calculate + ", current entry: " + currentEntry);
+            }
+            // when calculation is finished, CE has same functionality as AC
+            if (calculationFinished && this.id === "button_ce") {
+                calculate = "";
+                currentEntry = "";
+                previousEntry = "";
+                $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
+                $(".entry").html("<h1>" + previousEntry + "</h1>");
+                calculationFinished = false;
             }
         }
     });
