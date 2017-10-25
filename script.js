@@ -51,7 +51,7 @@ function calculateInput() {
                 $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
                 $(".entry").html("<h1>" + previousEntry + "</h1>");
             }
-
+            // first element is a dot, so put a "0" in front of it
             else if (currentEntry.length === 0 && this.id === "button_dot") {
                 currentEntry = "0.";
                 previousEntry = "0.";
@@ -60,8 +60,9 @@ function calculateInput() {
             }
 
             else if (currentEntry.length !== 0) {
+                // determining which button was pressed in order to perform the correct calculation
                 switch (this.id) {
-                    case "button_ce":
+                    case "button_ce": // clear entry - only clear current entry, not the entire calculation
                         previousEntry = "";
                         currentEntry = "";
                         $(".entry").html("<h1>" + previousEntry + "</h1>");
@@ -84,6 +85,7 @@ function calculateInput() {
                         calculate += " x ";
                         currentEntry = "";
                         $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
+                        // allows a minus sign to follow the multiplication sign, in order to calculate with negative numbers
                         potentialMinusOperation = true;
                         break;
                     case "button_div":
@@ -91,6 +93,7 @@ function calculateInput() {
                         calculate += " / ";
                         currentEntry = "";
                         $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
+                        // allows a minus sign to follow the division sign, in order to calculate with negative numbers
                         potentialMinusOperation = true;
                         break;
                     case  "button_dot":
@@ -120,6 +123,7 @@ function calculateInput() {
                 }
             }
 
+            // of the potential minus flag is set to true, allow "-" to be pressed
             if (potentialMinusOperation && this.id === "button_minus") {
                 calculate += " - ";
                 $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
