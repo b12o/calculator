@@ -6,7 +6,8 @@ var calculate = "",
     currentEntry = "", previousEntry = "",
     result = "";
 
-var calculationFinished = false;
+var calculationFinished = false, // for post-result operations
+    potentialMinusOperation = false; // to allow potential negative numbers
 
 function calculateInput() {
     $(".button").on("click", function () {
@@ -16,6 +17,9 @@ function calculateInput() {
             previousEntry = currentEntry;
             $(".entry").html("<h1>" + previousEntry + "</h1>");
             $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
+
+            if (potentialMinusOperation) potentialMinusOperation = false; // since no minus operation has been done.
+
         }
         else {
             // clear entire input
@@ -59,12 +63,14 @@ function calculateInput() {
                         calculate += " x ";
                         currentEntry = "";
                         $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
+                        potentialMinusOperation = true;
                         break;
                     case "button_div":
                         calculate += currentEntry;
                         calculate += " / ";
                         currentEntry = "";
                         $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
+                        potentialMinusOperation = true;
                         break;
                     case  "button_dot":
                         if (!isDecimal(currentEntry)) {
@@ -92,17 +98,47 @@ function calculateInput() {
                         break;
                 }
             }
-            // when calculation is finished, CE has same functionality as AC
-            if (calculationFinished && this.id === "button_ce") {
-                calculate = "";
-                currentEntry = "";
-                previousEntry = "";
+
+            if (potentialMinusOperation && this.id === "button_minus") {
+                calculate += " - ";
                 $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
-                $(".entry").html("<h1>" + previousEntry + "</h1>");
-                calculationFinished = false;
+                potentialMinusOperation = false;
+            }
+
+            // post-calculation options
+            if (calculationFinished) {
+                if (this.id === "button_ce") {
+                    // when calculation is finished, CE has same functionality as AC
+                    calculate = "";
+                    currentEntry = "";
+                    previousEntry = "";
+                    $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
+                    $(".entry").html("<h1>" + previousEntry + "</h1>");
+                    calculationFinished = false;
+                }
+                if (this.id === "button_plus" || this.id === "button_minus" ||
+                    this.id === "button_mult" || this.id === "button_div") {
+                    // use result for next calculation
+                    calculate = previousEntry + getOperationFromButton(this.id);
+                    $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
+                    calculationFinished = false;
+
+                    if (this.id === "button_mult" || this.id === "button_div") { // allowing for negative operations
+                        potentialMinusOperation = true;
+                    }
+                }
             }
         }
     });
+}
+
+function getOperationFromButton(button) {
+    switch (button) {
+        case "button_plus": return " + ";
+        case "button_minus": return " - ";
+        case "button_mult": return " x ";
+        case "button_div": return " / ";
+    }
 }
 
 function isDecimal(val) {
