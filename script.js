@@ -10,7 +10,9 @@ function calculateInput() {
     $(".button").on("click", function () {
 
         if (this.id.match(/\d/)) { // a number
-            currentEntry += this.id.match(/\d/)[0];
+            currentEntry += this.id.match(/\d/)[0]
+            previousEntry = currentEntry;
+            $(".entry").html("<h1>" + previousEntry + "</h1>");
             $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
             console.log("calculation: " + calculate + ", current entry: " + currentEntry);
         }
@@ -19,7 +21,9 @@ function calculateInput() {
             if ((calculate.length !== 0 || currentEntry !== 0) && this.id === "button_ac") {
                 calculate = "";
                 currentEntry = "";
+                previousEntry = "";
                 $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
+                $(".entry").html("<h1>" + previousEntry + "</h1>");
                 console.log("calculation: " + calculate + ", current entry: " + currentEntry);
             }
 
@@ -31,7 +35,9 @@ function calculateInput() {
             else if (currentEntry.length !== 0) {
                 switch (this.id) {
                     case "button_ce":
+                        previousEntry = "";
                         currentEntry = "";
+                        $(".entry").html("<h1>" + previousEntry + "</h1>");
                         $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
                         break;
                     case "button_plus":
@@ -67,9 +73,11 @@ function calculateInput() {
                         calculate += currentEntry;
                         console.log("calculation: " + calculate);
                         result = stringToCalculation(calculate);
+                        previousEntry = result;
                         if (result.toString().length > 18) {
                             $(".all-entries").html("<h2>OVERFLOW ERROR</h2>");
                         } else {
+                            $(".entry").html("<h1>" + previousEntry + "</h1>");
                             $(".all-entries").html("<h2>" + calculate + " = " + result + "</h2>");
                         }
                         console.log(result);
