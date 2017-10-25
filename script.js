@@ -1,5 +1,26 @@
 $(document).ready(function () {
     calculateInput();
+
+    $(".button").hover(function() {
+        // entering the area
+        if (this.id !== "button_hide_enter") {
+            $(this).css({
+                "box-shadow": "0 0 1rem rgb(20, 20, 20)"
+            }, 100);
+        }
+        else {
+            $("#button_enter").css({
+                "box-shadow": "0 0 1rem rgb(20, 20, 20)"
+            }, 100);
+        }
+
+    }, function () {
+        // leaving the area
+        $(this).css({
+            "box-shadow": ""
+        }, 100);
+    });
+
 });
 
 var calculate = "",
