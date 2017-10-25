@@ -23,14 +23,15 @@ html {
     margin-left: -0.45rem;
     background-color: #C0C0C0;
     box-shadow: 0 0 5rem rgb(20, 20, 20);
+    position: relative;
 }
 
 .entry {
     height: 58%;
-    width: 90%;
-    margin: auto;
-    position: relative;
+    width: 89%;
+    position: absolute;
     top: 1rem;
+    left: 1.5rem;
 }
 
 .entry h1 {
@@ -39,16 +40,19 @@ html {
 }
 
 .all-entries {
-    width: 90%;
+    width: 89%;
     height: 20%;
     margin: auto;
     overflow: hidden;
+    position: absolute;
+    top: 7rem;
+    left: 1.5rem;
 }
 
 .all-entries h2 {
-    position: relative;
+    position: absolute;
     top: -1rem;
-    float: right;
+    right: 0;
     color: #8D8D8D;
 }
 
