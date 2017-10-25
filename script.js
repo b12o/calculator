@@ -19,6 +19,11 @@ $(document).ready(function () {
         $(this).css({
             "box-shadow": ""
         }, 100);
+        if (this.id === "button_hide_enter") {
+            $("#button_enter").css({
+                "box-shadow": ""
+            }, 100);
+        }
     });
 
 });
