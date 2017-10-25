@@ -29,7 +29,9 @@ function calculateInput() {
 
             else if (currentEntry.length === 0 && this.id === "button_dot") {
                 currentEntry = "0.";
+                previousEntry = "0.";
                 $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
+                $(".entry").html("<h1>" + previousEntry + "</h1>");
             }
 
             else if (currentEntry.length !== 0) {
@@ -65,8 +67,12 @@ function calculateInput() {
                         $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
                         break;
                     case  "button_dot":
-                        if (!isDecimal(currentEntry)) currentEntry += ".";
+                        if (!isDecimal(currentEntry)) {
+                            currentEntry += ".";
+                            previousEntry += ".";
+                        }
                         $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
+                        $(".entry").html("<h1>" + previousEntry + "</h1>");
                         break;
                     case "button_enter":
                     case "button_hide_enter":
@@ -75,6 +81,7 @@ function calculateInput() {
                         result = stringToCalculation(calculate);
                         previousEntry = result;
                         if (result.toString().length > 18) {
+                            $(".entry").html("<h1>ERROR</h1>");
                             $(".all-entries").html("<h2>OVERFLOW ERROR</h2>");
                         } else {
                             $(".entry").html("<h1>" + previousEntry + "</h1>");
