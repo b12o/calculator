@@ -1,54 +1,39 @@
 $(document).ready(function () {
     calculateInput();
-
-
     // hover animation begin
     $(".button").hover(function() {
         // entering
         if (this.id !== "button_hide_enter") {
-            $(this).css({
-                "box-shadow": "0 0 0.5rem rgb(30, 30, 30)"
-            }, 100);
+            $(this).css({"box-shadow": "0 0 0.5rem rgb(30, 30, 30)"}, 100);
         }
         else {
-            $("#button_enter").css({
-                "box-shadow": "0 0 0.5rem rgb(30, 30, 30)"
-            }, 100);
+            $("#button_enter").css({"box-shadow": "0 0 0.5rem rgb(30, 30, 30)"}, 100);
         }
-
     }, function () {
         // leaving
-        $(this).css({
-            "box-shadow": ""
-        }, 100);
+        $(this).css({"box-shadow": ""}, 100);
         if (this.id === "button_hide_enter") {
-            $("#button_enter").css({
-                "box-shadow": ""
-            }, 100);
+            $("#button_enter").css({"box-shadow": ""}, 100);
         }
     });
     // hover animation end
-
 });
 
-var calculate = "",
-    currentEntry = "", previousEntry = "",
+let calculate = "",
+    currentEntry = "",
+    previousEntry = "",
     result = "";
-
-var calculationFinished = false, // for post-result operations
+let calculationFinished = false, // for post-result operations
     potentialMinusOperation = false; // to allow potential negative numbers
 
 function calculateInput() {
     $(".button").on("click", function () {
-
-        if (this.id.match(/\d/)) { // a number
-            currentEntry += this.id.match(/\d/)[0]
+        // user types in a number
+        if (this.id.match(/\d/)) {
+            currentEntry += this.id.match(/\d/)[0];
             previousEntry = currentEntry;
-            $(".entry").html("<h1>" + previousEntry + "</h1>");
-            $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
-
             if (potentialMinusOperation) potentialMinusOperation = false; // since no minus operation has been done.
-
+            renderAll();
         }
         else {
             // clear entire input
@@ -56,88 +41,54 @@ function calculateInput() {
                 calculate = "";
                 currentEntry = "";
                 previousEntry = "";
-                $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
-                $(".entry").html("<h1>" + previousEntry + "</h1>");
+                renderAll();
             }
             // first element is a dot, so put a "0" in front of it
             else if (currentEntry.length === 0 && this.id === "button_dot") {
                 currentEntry = "0.";
                 previousEntry = "0.";
-                $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
-                $(".entry").html("<h1>" + previousEntry + "</h1>");
+                if (potentialMinusOperation) potentialMinusOperation = false;
+                renderAll();
             }
-
+            // determine which button was pressed in order to perform the correct calculation
             else if (currentEntry.length !== 0) {
-                // determining which button was pressed in order to perform the correct calculation
-                switch (this.id) {
-                    case "button_ce": // clear entry - only clear current entry, not the entire calculation
+                if (this.className === "button button-operator") {
+                    calculate += currentEntry + this.dataset.value;
+                    currentEntry = "";
+                    $(".all-entries").html("<h2>" + calculate + "</h2>");
+                    if (this.id === "button_mult" || this.id === "button_div") potentialMinusOperation = true;
+                }
+                else switch (this.id) {
+                    case "button_ce": // only clear current entry, not entire calculation
                         previousEntry = "";
                         currentEntry = "";
-                        $(".entry").html("<h1>" + previousEntry + "</h1>");
-                        $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
-                        break;
-                    case "button_plus":
-                        calculate += currentEntry;
-                        calculate += " + ";
-                        currentEntry = "";
-                        $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
-                        break;
-                    case "button_minus":
-                        calculate += currentEntry;
-                        calculate += " - ";
-                        currentEntry = "";
-                        $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
-                        break;
-                    case "button_mult":
-                        calculate += currentEntry;
-                        calculate += " x ";
-                        currentEntry = "";
-                        $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
-                        // allows a minus sign to follow the multiplication sign, in order to calculate with negative numbers
-                        potentialMinusOperation = true;
-                        break;
-                    case "button_div":
-                        calculate += currentEntry;
-                        calculate += " / ";
-                        currentEntry = "";
-                        $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
-                        // allows a minus sign to follow the division sign, in order to calculate with negative numbers
-                        potentialMinusOperation = true;
+                        renderAll();
                         break;
                     case  "button_dot":
-                        if (!isDecimal(currentEntry)) {
+                        if (currentEntry.match(/\./) === null) {
                             currentEntry += ".";
                             previousEntry += ".";
                         }
-                        $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
-                        $(".entry").html("<h1>" + previousEntry + "</h1>");
+                        renderAll();
                         break;
                     case "button_enter":
                     case "button_hide_enter":
                         calculate += currentEntry;
                         result = stringToCalculation(calculate);
                         previousEntry = result;
-                        if (result.toString().length > 18) {
-                            $(".entry").html("<h1>ERROR</h1>");
-                            $(".all-entries").html("<h2>OVERFLOW ERROR</h2>");
-                        } else {
-                            $(".entry").html("<h1>" + previousEntry + "</h1>");
-                            $(".all-entries").html("<h2>" + calculate + " = " + result + "</h2>");
-                        }
+                        renderResult(result);
                         calculationFinished = true;
                         calculate = "";
                         currentEntry = "";
                         break;
                 }
             }
-
             // of the potential minus flag is set to true, allow "-" to be pressed
-            if (potentialMinusOperation && this.id === "button_minus") {
+           if (potentialMinusOperation && this.id === "button_minus") {
                 calculate += " - ";
                 $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
                 potentialMinusOperation = false;
             }
-
             // post-calculation options
             if (calculationFinished) {
                 if (this.id === "button_ce") {
@@ -145,18 +96,16 @@ function calculateInput() {
                     calculate = "";
                     currentEntry = "";
                     previousEntry = "";
-                    $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
-                    $(".entry").html("<h1>" + previousEntry + "</h1>");
+                    renderAll();
                     calculationFinished = false;
                 }
-                if (this.id === "button_plus" || this.id === "button_minus" ||
-                    this.id === "button_mult" || this.id === "button_div") {
+                if (this.className === "button button-operator") {
                     // use result for next calculation
-                    calculate = previousEntry + getOperationFromButton(this.id);
+                    calculate = previousEntry + this.dataset.value;
                     $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
                     calculationFinished = false;
-
-                    if (this.id === "button_mult" || this.id === "button_div") { // allowing for negative operations
+                    // allowing for negative operations
+                    if (this.id === "button_mult" || this.id === "button_div") {
                         potentialMinusOperation = true;
                     }
                 }
@@ -164,22 +113,27 @@ function calculateInput() {
         }
     });
 }
-
-function getOperationFromButton(button) {
-    switch (button) {
-        case "button_plus": return " + ";
-        case "button_minus": return " - ";
-        case "button_mult": return " x ";
-        case "button_div": return " / ";
+// render main and secondary screen
+function renderAll() {
+    $(".entry").html("<h1>" + previousEntry + "</h1>");
+    $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
+}
+// render result
+function renderResult(result) {
+    if (result.toString().length > 17) renderError();
+    else {
+        $(".entry").html("<h1>" + previousEntry + "</h1>");
+        $(".all-entries").html("<h2>" + calculate + " = " + result + "</h2>");
     }
 }
-
-function isDecimal(val) {
-    return (val.match(/\./) !== null);
+function renderError() {
+    $(".entry").html("<h1>ERROR</h1>");
+    $(".all-entries").html("<h2>OVERFLOW ERROR</h2>");
 }
 // takes calculation in string form, converts to mathematical calculation and returns result
 function stringToCalculation(string) {
-    var newString = string.replace(/x/g, "*"); // eval does not accept "x" as multiplication, only "*"
-    var result = eval(newString);
+    let newString = string.replace(/x/g, "*"); // eval does not accept "x" as multiplication, only "*"
+    newString = newString.replace(/÷/g, "/"); // same goes for division icon
+    let result = eval(newString);
     return Math.round(result * 100) / 100; // handling for JS floating point weirdness
 }
