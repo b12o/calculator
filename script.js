@@ -5,12 +5,12 @@ $(document).ready(function () {
         // entering the area
         if (this.id !== "button_hide_enter") {
             $(this).css({
-                "box-shadow": "0 0 1rem rgb(20, 20, 20)"
+                "box-shadow": "0 0 0.5rem rgb(30, 30, 30)"
             }, 100);
         }
         else {
             $("#button_enter").css({
-                "box-shadow": "0 0 1rem rgb(20, 20, 20)"
+                "box-shadow": "0 0 0.5rem rgb(30, 30, 30)"
             }, 100);
         }
 
