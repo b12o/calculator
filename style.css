@@ -1,12 +1,8 @@
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Josefin Sans", sans-serif;
-}
-h1 {
-    font-size: 3rem;
-}
-html {
-    background-color: #DBDBDB;
-}
+
+html {  background-color: #DBDBDB;  }
+h1, h2, h3, h4, h5, h6 {  font-family: "Josefin Sans", sans-serif;  }
+button {  outline: none;  }
+
 .calculator-body {
     margin: 7rem auto;
     background-color: #8D8D8D;
@@ -47,9 +43,6 @@ html {
     top: -1rem;
     right: 0;
     color: #8D8D8D;
-}
-button {
-    outline: none;
 }
 .buttons {
     background-color: #C0C0C0;
