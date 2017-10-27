@@ -1,8 +1,10 @@
 $(document).ready(function () {
     calculateInput();
 
+
+    // hover animation begin
     $(".button").hover(function() {
-        // entering the area
+        // entering
         if (this.id !== "button_hide_enter") {
             $(this).css({
                 "box-shadow": "0 0 0.5rem rgb(30, 30, 30)"
@@ -15,7 +17,7 @@ $(document).ready(function () {
         }
 
     }, function () {
-        // leaving the area
+        // leaving
         $(this).css({
             "box-shadow": ""
         }, 100);
@@ -25,6 +27,7 @@ $(document).ready(function () {
             }, 100);
         }
     });
+    // hover animation end
 
 });
 
