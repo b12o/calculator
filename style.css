@@ -1,6 +1,7 @@
 
 html {  background-color: #DBDBDB;  }
 h1, h2, h3, h4, h5, h6 {  font-family: "Josefin Sans", sans-serif;  }
+h1 { font-size : 3rem; }
 button {  outline: none;  }
 
 .calculator-body {
@@ -74,6 +75,8 @@ button {  outline: none;  }
 .button-operator {
     background-color: #6F6F6F;
     color: #E0E0E0;
+    font-weight: bold;
+    font-size: 2rem;
 }
 .button-clear {
     background-color: #9D0404;
