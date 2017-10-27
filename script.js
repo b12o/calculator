@@ -55,7 +55,7 @@ function calculateInput() {
                 if (this.className === "button button-operator") {
                     calculate += currentEntry + this.dataset.value;
                     currentEntry = "";
-                    $(".all-entries").html("<h2>" + calculate + "</h2>");
+                    renderSecondary(calculate);
                     if (this.id === "button_mult" || this.id === "button_div") potentialMinusOperation = true;
                 }
                 else switch (this.id) {
@@ -86,7 +86,7 @@ function calculateInput() {
             // of the potential minus flag is set to true, allow "-" to be pressed
            if (potentialMinusOperation && this.id === "button_minus") {
                 calculate += " - ";
-                $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
+               renderSecondary(calculate + currentEntry);
                 potentialMinusOperation = false;
             }
             // post-calculation options
@@ -102,7 +102,7 @@ function calculateInput() {
                 if (this.className === "button button-operator") {
                     // use result for next calculation
                     calculate = previousEntry + this.dataset.value;
-                    $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
+                    renderSecondary(calculate + currentEntry);
                     calculationFinished = false;
                     // allowing for negative operations
                     if (this.id === "button_mult" || this.id === "button_div") {
@@ -116,14 +116,28 @@ function calculateInput() {
 // render main and secondary screen
 function renderAll() {
     $(".entry").html("<h1>" + previousEntry + "</h1>");
-    $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
+    if (calculate.length + currentEntry.length > 34) {
+        $(".all-entries").html("<h2> calculation overflow</h2>");
+    }
+    else $(".all-entries").html("<h2>" + calculate + currentEntry + "</h2>");
 }
+// mainly to account for calculation overflow
+function renderSecondary(val) {
+    if (calculate.length + currentEntry.length > 34) {
+        $(".all-entries").html("<h2> calculation overflow </h2>");
+    }
+    else $(".all-entries").html("<h2>" + val + "</h2>");
+}
+
 // render result
 function renderResult(result) {
     if (result.toString().length > 17) renderError();
     else {
         $(".entry").html("<h1>" + previousEntry + "</h1>");
-        $(".all-entries").html("<h2>" + calculate + " = " + result + "</h2>");
+        if (calculate.length + currentEntry.length + result > 34) {
+            $(".all-entries").html("<h2>" + result + "</h2>");
+        }
+        else $(".all-entries").html("<h2>" + calculate + " = " + result + "</h2>");
     }
 }
 function renderError() {
