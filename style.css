@@ -1,22 +1,18 @@
 h1, h2, h3, h4, h5, h6 {
     font-family: "Josefin Sans", sans-serif;
 }
-
 h1 {
     font-size: 3rem;
 }
-
 html {
     background-color: #DBDBDB;
 }
-
 .calculator-body {
     margin: 7rem auto;
     background-color: #8D8D8D;
     width: 30rem;
     height: 40rem;
 }
-
 .calculator-screen {
     width: 103%;
     height: 25%;
@@ -25,7 +21,6 @@ html {
     box-shadow: 0 0 5rem rgb(20, 20, 20);
     position: relative;
 }
-
 .entry {
     height: 58%;
     width: 89%;
@@ -34,12 +29,10 @@ html {
     left: 1.5rem;
     overflow: hidden;
 }
-
 .entry h1 {
     color: #3D3D3D;
     float: right;
 }
-
 .all-entries {
     width: 89%;
     height: 20%;
@@ -49,18 +42,15 @@ html {
     top: 7rem;
     left: 1.5rem;
 }
-
 .all-entries h2 {
     position: absolute;
     top: -1rem;
     right: 0;
     color: #8D8D8D;
 }
-
 button {
     outline: none;
 }
-
 .buttons {
     background-color: #C0C0C0;
     width: 90%;
@@ -68,63 +58,42 @@ button {
     margin: 2rem auto;
     box-shadow: 0 0 5rem rgb(20, 20, 20);
 }
-
 .button-row {
-    margin: auto;
-    margin-top: 0.1rem;
+    margin: 0.1rem auto;
     width: inherit;
     height: 5.08rem;
     display: flex;
     justify-content: space-between;
 }
-
 .button {
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.5rem;
     border: 1px solid transparent;
     width: 4.5rem;
     height: 4.5rem;
     border-radius: 9rem;
     margin-top: 0.3rem;
 }
-
-#button_0, #button_1, #button_2, #button_3,
-#button_4, #button_5, #button_6, #button_7,
-#button_8, #button_9, #button_dot {
+.button-number, #button_dot {
     background-color: #E0E0E0;
     color: #6F6F6F;
 }
-
-#button_plus, #button_minus, #button_mult,
-#button_div {
+.button-operator {
     background-color: #6F6F6F;
     color: #E0E0E0;
 }
-
-#button_minus h2, #button_plus h2, #button_mult h2, #button_div h2{
-    font-size: 2rem;
-    position: relative;
-    bottom: 0.5rem;
-}
-
-#button_hide2{
-    display: none;
-}
-
-#button_hide_enter {
-    /*visibility: hidden;*/
-    background-color: inherit;
-}
-
-#button_enter {
-    background-color: #9BEBBD;
-    height: 9.7rem;
-    color: #6F6F6F;
-}
-
-#button_ac, #button_ce {
+.button-clear {
     background-color: #9D0404;
     color: #E0E0E0;
 }
+/* hidden buttons */
+#button_hide2{  display: none;  }
+#button_hide_enter {  background-color: inherit;  }
 
-#button_0 {
-    width: 11.3rem;
+#button_enter {
+background-color: #9BEBBD;
+height: 9.7rem;
+color: #6F6F6F;
 }
+
+#button_0 {  width: 11.3rem;  }
