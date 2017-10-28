@@ -82,6 +82,17 @@ button {  outline: none;  }
     background-color: #9D0404;
     color: #E0E0E0;
 }
+.footer{
+    text-align: center;
+    color: #8D8D8D;
+}
+.footer a, .footer a:hover {
+    text-decoration: none;
+    color: #8D8D8D;
+}
+.footer a:hover {
+    color: #FFF;
+}
 /* hidden buttons */
 #button_hide2{  display: none;  }
 #button_hide_enter {  background-color: inherit;  }
