@@ -4,10 +4,10 @@ $(document).ready(function () {
     $(".button").hover(function() {
         // entering
         if (this.id !== "button_hide_enter") {
-            $(this).css({"box-shadow": "0 0 0.5rem rgb(30, 30, 30)"}, 100);
+            $(this).css({"box-shadow": "0 5px 5px rgba(0, 0, 0, 0.24)"}, 100);
         }
         else {
-            $("#button_enter").css({"box-shadow": "0 0 0.5rem rgb(30, 30, 30)"}, 100);
+            $("#button_enter").css({"box-shadow": "0 5px 5px rgba(0, 0, 0, 0.24)"}, 100);
         }
     }, function () {
         // leaving
@@ -113,6 +113,11 @@ function calculateInput() {
         }
     });
 }
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 // render main and secondary screen
 function renderAll() {
     $(".entry").html("<h1>" + previousEntry + "</h1>");
